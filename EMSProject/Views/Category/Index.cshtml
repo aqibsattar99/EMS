@@ -1,0 +1,71 @@
+﻿@model IEnumerable<EMSProject.Models.category>
+
+@{
+    ViewBag.Title = "Category List";
+}
+
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Create New Category</h4>
+            </div>
+            <div class="card-body">
+
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input class="form-control" id="name" />
+
+                            </div>
+                        </div>
+                    </div>
+           
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <button id="btn-cate-add" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-8">
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Category List</h4>
+            </div>
+            <div class="card-body">
+              
+                <table class="table table-bordered table-striped" id="tblcat">
+                    <thead>
+                        <tr>
+                            <th>
+                                <label>Sr</label>
+                            </th>
+                            <th>
+                                <label>Name</label>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be populated here by JavaScript -->
+                    </tbody>
+                </table>
+            
+            
+            </div>
+        </div>
+
+
+    </div>
+</div>
