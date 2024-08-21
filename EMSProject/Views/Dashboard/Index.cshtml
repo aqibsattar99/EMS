@@ -1,0 +1,43 @@
+﻿@model IEnumerable<EMSProject.Models.equipment>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="container-fluid">
+    <!-- Top Boxes Section -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-cogs fa-3x"></i>
+                    <h5 class="card-title">Total Equipment</h5>
+                    <p class="card-text"> @ViewBag.TotalEquipments</p> <!-- Example data -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-dollar-sign fa-3x"></i>
+                    <h5 class="card-title">Total Categories</h5>
+                    <p class="card-text"> @ViewBag.TotalCategories</p> <!-- Example data -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-dollar-sign fa-3x"></i>
+                    <h5 class="card-title">Total Price</h5>
+                    <p class="card-text"> @ViewBag.TotalPriceSum</p> <!-- Example data -->
+                </div>
+            </div>
+        </div>
+       
+      
+    </div>
+
+  
+
+</div>

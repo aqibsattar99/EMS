@@ -1,0 +1,55 @@
+﻿@model EMSProject.Models.equipment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Are you sure you want to delete this?</h4>
+    </div>
+    <div class="card-body">
+        <div class="form-horizontal">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.price)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.price)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.purchdate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.purchdate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.category.name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.category.name)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="card-footer">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary ml-2" })
+            </div>
+        }
+    </div>
+</div>
