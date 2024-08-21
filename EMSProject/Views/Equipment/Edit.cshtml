@@ -42,7 +42,8 @@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.purchdate, htmlAttributes: new { @class = "control-label" })
-                            @Html.EditorFor(model => model.purchdate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                            @Html.TextBoxFor(model => model.purchdate, new { @class = "form-control", type = "date", Value = Model.purchdate.HasValue ? Model.purchdate.Value.ToString("yyyy-MM-dd") : string.Empty })
+
                             @Html.ValidationMessageFor(model => model.purchdate, "", new { @class = "text-danger" })
                         </div>
                     </div>

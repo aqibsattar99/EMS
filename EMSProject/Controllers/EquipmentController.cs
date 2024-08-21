@@ -17,6 +17,7 @@ namespace EMSProject.Controllers
         public ActionResult Index()
         {
             var equipments = db.equipments.Include(e => e.category);
+            
             return View(equipments.ToList());
         }
 

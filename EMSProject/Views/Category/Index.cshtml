@@ -4,6 +4,48 @@
     ViewBag.Title = "Category List";
 }
 
+
+
+<!-- Modal Edit -->
+<div class="modal fade" id="modal-cate-edit" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title">Edit Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+
+            </div>
+            <div class="modal-body">
+
+
+
+                <div class="col-md-12">
+                    <label> Name</label>
+                    <input class="form-control" id="id" type="hidden" placeholder="" />
+                    <input class="form-control" id="namecat" type="text" placeholder="" />
+
+
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btn-cate-edit"> Update </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
 <div class="row">
     <div class="col-md-4">
 
@@ -22,12 +64,12 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input class="form-control" id="name" />
+                                <input class="form-control" id="namecat" />
 
                             </div>
                         </div>
                     </div>
-           
+
                 </div>
 
             </div>
@@ -44,7 +86,7 @@
                 <h4>Category List</h4>
             </div>
             <div class="card-body">
-              
+
                 <table class="table table-bordered table-striped" id="tblcat">
                     <thead>
                         <tr>
@@ -61,11 +103,12 @@
                         <!-- Data will be populated here by JavaScript -->
                     </tbody>
                 </table>
-            
-            
+
+
             </div>
         </div>
 
 
     </div>
 </div>
+

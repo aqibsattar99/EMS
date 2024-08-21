@@ -1,11 +1,14 @@
 ﻿$(document).ready(function () {
     $('#tblcat').DataTable(); // Initialize DataTable after everything is loaded
     $('#tbleqpt').DataTable(); // Initialize DataTable after everything is loaded
+
+
+    $('#loadingModal').modal('show');
 });
 
 $(document).ready(function () {
 $("#btn-cate-add").click(function () {
-    var Name = $('#name').val();
+    var Name = $('#namecat').val();
     
     if (Name == "") {
 
@@ -24,7 +27,7 @@ $("#btn-cate-add").click(function () {
             },
             success: function (response) {
                 // Clear Input Fields
-                $("#name").val("");
+                $("#namecat").val("");
                 alert("Data Inserted");
 
 
@@ -44,6 +47,9 @@ $("#btn-cate-add").click(function () {
 
 
     function loadData() {
+       
+
+
         $.ajax({
             url: '/category/GetCategories',
             type: 'GET',
@@ -59,19 +65,81 @@ $("#btn-cate-add").click(function () {
                     table.row.add([
                         i,
                         category.Name,
-                        '<a href="/category/Edit/' + category.Id + '" class="btn btn-sm btn-warning">Edit</a> | ' +
-                        '<a href="/category/Details/' + category.Id + '" class="btn btn-sm btn-info">Details</a> | ' +
+                        '<a href="#" data-id="' + category.Id + '" data-name="' + category.Name + '" class="btn btn-sm btn-warning cat-edit-btn">Edit</a> | ' +
                         '<a href="/category/Delete/' + category.Id + '" class="btn btn-sm btn-danger">Delete</a>'
                     ]).draw(false);
                 });
+
+                // Event delegation to handle click events on dynamically added buttons
+                $('#tblcat').on('click', '.cat-edit-btn', function (e) {
+                    e.preventDefault(); // Prevent default link behavior
+
+                    var id = $(this).data('id'); // Get ID from data attribute
+                    var name = $(this).data('name'); // Get Name from data attribute
+
+                    // Populate the modal with data
+                    $("#modal-cate-edit #id").val(id);
+                    $('#modal-cate-edit #namecat').val(name);
+
+                    // Load Modal
+                    $('#modal-cate-edit').modal('show');
+                });
             },
             error: function (xhr, status, error) {
-                alert("An error occurred while loading data: " + error);
+                // Display an alert with the error details
+                alert("Error: " + error);
             }
         });
+
     }
 
+
+
     loadData();
+
+
+    $("#btn-cate-edit").click(function () {
+        var Id = $('#modal-cate-edit #id').val();
+        var Name = $('#modal-cate-edit #namecat').val();
+      
+        if (Name == "") {
+            alert("Enter Category Name");
+
+        } else {
+
+            $("#btn-cate-edit").text("Updating...");
+            $.ajax({
+                url: "/category/Update",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    id: Id,
+                    name: Name,
+                  
+                },
+                success: function (response) {
+                    // Clear Inputs
+                    $("#modal-cate-edit input").val("");
+                    $("#modal-cate-edit select").val("");
+                    $("#modal-cate-edit textarea").val("");
+
+                    alert("Successfully Updated!!!");
+
+                    // Button Text Change
+                    $("#btn-cate-edit").text("Update");
+
+                    setTimeout(function () {
+                        $("#modal-cate-edit").modal('hide');
+                    }, 1500);
+                    loadData();
+
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                }
+            });
+        }
+    });
 
 
 });

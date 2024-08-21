@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using EMSProject.Models;
@@ -35,14 +36,9 @@ namespace EMSProject.Controllers
             return View(category);
         }
 
-        // GET: Category/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
 
-
+        // Get List of Categories
         [HttpGet]
         public JsonResult GetCategories()
         {
@@ -57,11 +53,8 @@ namespace EMSProject.Controllers
 
 
 
-        // POST: Category/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // Add Record
         [HttpPost]
-
         public ActionResult Create(category cate)
         {
            
@@ -70,36 +63,43 @@ namespace EMSProject.Controllers
                 return Json("Success");
         }
 
-        // GET: Category/Edit/5
-        public ActionResult Edit(int? id)
+
+        // Get Single Record
+        [HttpPost]
+        public ActionResult GetSingle(int Id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            category category = db.categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
+        
+                var listcat = db.categories.Where(c => c.id == Id).FirstOrDefault();
+                return Json(listcat);
         }
 
-        // POST: Category/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+
+        // Update 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name")] category category)
+        public ActionResult Update(category cat)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(category);
+
+            var existingEntity = db.categories.Where(c => c.id == cat.id).FirstOrDefault();
+
+            existingEntity.name = cat.name;
+            db.Entry(existingEntity);
+            db.SaveChanges();
+
+            return Json("Success !!!");
         }
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: Category/Delete/5
         public ActionResult Delete(int? id)
